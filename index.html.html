@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Federico Piovano — Industrial Production Engineer</title>
+  <meta name="description" content="Portfolio di Federico Piovano — Ingegnere della Produzione Industriale, Data Analyst, Supply Chain Specialist." />
+
+  <!-- Fonts: Sora (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <!-- AOS Scroll Animations -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — Apple-inspired palette
+    ============================================================ */
+    :root {
+      --bg:         #F5F5F7;
+      --bg-alt:     #FFFFFF;
+      --bg-dark:    #1D1D1F;
+      --text-dark:  #1D1D1F;
+      --text-mid:   #3A3A3C;
+      --text-muted: #6E6E73;
+      --accent:     #0071E3;
+      --accent-soft:#E8F0FD;
+      --green:      #1A7A4A;
+      --green-soft: #EAF7F0;
+      --border:     rgba(0,0,0,0.08);
+      --border-light: rgba(0,0,0,0.05);
+      --card-shadow: 0 2px 24px rgba(0,0,0,0.06);
+      --card-shadow-hover: 0 24px 64px rgba(0,0,0,0.12);
+      --radius-xl:  2rem;
+      --radius-lg:  1.25rem;
+      --radius-pill: 999px;
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text-dark);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ============================================================
+       SCROLLBAR
+    ============================================================ */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #C7C7CC; border-radius: 999px; }
+
+    /* ============================================================
+       TYPOGRAPHY
+    ============================================================ */
+    .font-display { font-family: 'Sora', sans-serif; }
+    .text-muted { color: var(--text-muted); }
+    .text-mid   { color: var(--text-mid); }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(245,245,247,0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-light);
+      transition: box-shadow 0.3s ease;
+    }
+    #navbar.scrolled { box-shadow: 0 1px 32px rgba(0,0,0,0.07); }
+
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700; 
+      font-size: 1.2rem;
+      letter-spacing: -0.02em; 
+      color: var(--text-dark);
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem; font-weight: 400;
+      color: var(--text-mid); letter-spacing: 0.01em;
+      position: relative; transition: color 0.2s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 1.5px; background: var(--accent);
+      transition: width 0.3s ease; border-radius: 999px;
+    }
+    .nav-links a:hover { color: var(--text-dark); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .btn-cv {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--accent); color: #fff;
+      padding: 0.45rem 1.1rem; border-radius: var(--radius-pill);
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.01em;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-cv:hover {
+      background: #0062C4; transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0,113,227,0.35);
+    }
+
+    /* ── Hamburger ── */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-dark); transition: all 0.3s; border-radius: 999px; }
+
+    /* ── Mobile nav ── */
+    #mobile-menu {
+      display: none;
+      position: fixed; top: 60px; left: 0; right: 0;
+      background: rgba(245,245,247,0.96);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem; z-index: 99;
+    }
+    #mobile-menu.open { display: block; }
+    #mobile-menu a {
+      display: block; padding: 0.75rem 0;
+      font-size: 1rem; color: var(--text-mid);
+      border-bottom: 1px solid var(--border-light);
+    }
+    #mobile-menu .btn-cv { display: inline-flex; margin-top: 1rem; }
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--text-dark); color: #fff;
+      padding: 0.9rem 2rem; border-radius: var(--radius-pill);
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      border: none; cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--text-mid); transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(29,29,31,0.22);
+    }
+
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: var(--text-dark);
+      padding: 0.9rem 2rem; border-radius: var(--radius-pill);
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500;
+      border: 1.5px solid rgba(29,29,31,0.22);
+      transition: all 0.25s; cursor: pointer;
+    }
+    .btn-outline:hover {
+      border-color: var(--text-dark); background: rgba(29,29,31,0.04);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================================
+       SECTION HELPERS
+    ============================================================ */
+    .section-wrap { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+    .section-eyebrow {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent);
+    }
+    .section-title {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;
+      color: var(--text-dark);
+    }
+    .divider {
+      width: 36px; height: 2px; background: var(--accent);
+      border-radius: 999px; margin: 0.75rem 0 0;
+    }
+    .divider.center { margin: 0.75rem auto 0; }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      min-height: 100svh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding-top: 60px; padding-bottom: 2rem;
+      position: relative; overflow: hidden;
+    }
+
+    /* Soft gradient orbs */
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(90px); pointer-events: none;
+    }
+    .orb-1 { width: 560px; height: 560px; background: #C7E0FF; opacity: 0.45; top: -120px; right: -120px; }
+    .orb-2 { width: 380px; height: 380px; background: #D1ECE4; opacity: 0.35; bottom: -60px; left: -80px; }
+
+    .hero-label {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--accent-soft); color: var(--accent);
+      padding: 0.4rem 1rem; border-radius: 999px;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.05em;
+      margin-bottom: 1.75rem;
+    }
+    .hero-label::before { display: none !important; }
+    /* Animazione per il pallino verde lampeggiante */
+    @keyframes pulse-green {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(52, 199, 89, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 199, 89, 0); }
+    }
+
+    .dot-green {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: #34C759; /* Verde Apple */
+      border-radius: 50%;
+      margin-right: 8px;
+      animation: pulse-green 2s infinite;
+      vertical-align: middle;
+    }
+
+    
+    
+
+    .hero-name {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 800; letter-spacing: -0.04em; line-height: 1.0;
+      color: var(--text-dark); margin-bottom: 0.5rem;
+    }
+    .hero-name em { font-style: normal; color: var(--accent); }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--text-muted); font-weight: 300; line-height: 1.65;
+      max-width: 560px; margin-bottom: 2.5rem;
+    }
+
+    .hero-stats {
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      margin-top: 3.5rem; padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: 'Sora', sans-serif;
+      font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; color: var(--text-dark);
+    }
+    .stat-num span { font-size: 1.1rem; color: var(--accent); }
+    .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.15rem; }
+
+    /* ============================================================
+       ABOUT
+    ============================================================ */
+    #about { padding: 8rem 0; background: var(--bg-alt); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-text p {
+      font-size: 1.1rem; line-height: 1.8; color: var(--text-mid);
+      font-weight: 300; margin-bottom: 1.25rem;
+    }
+    .about-text p strong { color: var(--text-dark); font-weight: 600; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+    .tag {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      background: var(--bg); border: 1px solid var(--border);
+      padding: 0.35rem 0.9rem; border-radius: 999px;
+      font-size: 0.8rem; font-weight: 500; color: var(--text-mid);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .tag:hover { border-color: var(--accent); color: var(--accent); }
+
+    .about-visual {
+      background: linear-gradient(135deg, var(--text-dark) 0%, #3A3A3C 100%);
+      border-radius: var(--radius-xl); padding: 2.5rem;
+      color: #fff; position: relative; overflow: hidden;
+    }
+    .about-visual::before {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: var(--accent); filter: blur(60px); opacity: 0.3;
+    }
+    .about-quote {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.2rem; font-style: italic; font-weight: 300;
+      line-height: 1.6; color: rgba(255,255,255,0.85);
+      margin-bottom: 1.5rem; position: relative; z-index: 1;
+    }
+    .about-quote-attr {
+      font-size: 0.78rem; color: rgba(255,255,255,0.4);
+      letter-spacing: 0.08em; text-transform: uppercase; position: relative; z-index: 1;
+    }
+    .about-metrics {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+      margin-top: 2rem; padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      position: relative; z-index: 1;
+    }
+    .metric-val {
+      font-family: 'Sora', sans-serif;
+      font-size: 2rem; font-weight: 700; color: #fff; letter-spacing: -0.03em;
+    }
+    .metric-val span { color: var(--accent); font-size: 1.2rem; }
+    .metric-lbl { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+    /* ============================================================
+       PROJECTS
+    ============================================================ */
+    /* ============================================================
+       NUOVO LAYOUT PROGETTI (STILE OPUS)
+    ============================================================ */
+    #projects { padding: 8rem 0; background: var(--bg); }
+
+    .projects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin-top: 3.5rem;
+    }
+
+    .project-card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    .project-card:hover {
+      box-shadow: var(--card-shadow-hover);
+      transform: translateY(-4px);
+    }
+
+    .project-card-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* Effetto alternato: uno a destra, uno a sinistra */
+    .project-card:nth-child(even) .project-card-inner { direction: rtl; }
+    .project-card:nth-child(even) .project-card-inner > * { direction: ltr; }
+
+    .project-content {
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .project-number {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    .project-star-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .project-star-item {
+      display: flex;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    .star-icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      background: var(--accent-soft);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      margin-top: 1px;
+    }
+
+    .project-image-area {
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 360px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .image-placeholder {
+      width: 85%;
+      height: 75%;
+      background: var(--bg-alt);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    @media (max-width: 1024px) {
+      .project-card-inner { grid-template-columns: 1fr; }
+      .project-card:nth-child(even) .project-card-inner { direction: ltr; }
+      .project-image-area { min-height: 260px; }
+    }
+
+    /* ============================================================
+       EXPERIENCE
+    ============================================================ */
+    #experience { padding: 8rem 0; background: var(--bg-alt); }
+
+    .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3.5rem; }
+
+    .timeline-item { display: flex; gap: 1.5rem; }
+    .timeline-left { display: flex; flex-direction: column; align-items: center; }
+    .tl-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0; margin-top: 4px;
+      box-shadow: 0 0 0 3px rgba(0,113,227,0.2);
+    }
+    .tl-line {
+      width: 1.5px; flex: 1; margin-top: 6px; min-height: 80px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+    .timeline-right { flex: 1; }
+    .tl-date { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.3rem; }
+    .tl-role {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.2rem;
+    }
+    .tl-company { font-size: 0.95rem; color: var(--text-muted); font-weight: 400; margin-bottom: 1.25rem; }
+
+    .tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .tl-bullets li {
+      display: flex; gap: 0.6rem; font-size: 0.9rem; color: var(--text-mid);
+      font-weight: 300; line-height: 1.6;
+    }
+    .tl-bullets li::before {
+      content: ''; display: block; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0; margin-top: 8px;
+    }
+    .tl-tech { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 1.25rem; }
+    .tech-chip {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 999px; padding: 0.22rem 0.75rem;
+      font-size: 0.78rem; font-weight: 500; color: var(--text-muted);
+    }
+
+    /* Highlight box */
+    .exp-highlight {
+      background: linear-gradient(145deg, var(--text-dark) 0%, #2D2D2F 100%);
+      border-radius: var(--radius-xl); padding: 2.5rem; color: #fff;
+      position: relative; overflow: hidden;
+    }
+    .exp-highlight::before {
+      content: ''; position: absolute; top: -50px; right: -50px;
+      width: 180px; height: 180px; border-radius: 50%;
+      background: var(--accent); filter: blur(60px); opacity: 0.25;
+    }
+    .exp-quote {
+      font-family: 'Sora', sans-serif; font-size: 1.05rem;
+      font-style: italic; font-weight: 300; line-height: 1.7;
+      color: rgba(255,255,255,0.8); margin-bottom: 0.75rem; position: relative; z-index: 1;
+    }
+    .exp-quote-attr {
+      font-size: 0.75rem; color: rgba(255,255,255,0.35);
+      letter-spacing: 0.08em; text-transform: uppercase; position: relative; z-index: 1;
+    }
+    .exp-nums {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem; margin-top: 2rem; padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      position: relative; z-index: 1;
+    }
+    .exp-num { font-family: 'Sora', sans-serif; font-size: 2.2rem; font-weight: 700; color: #fff; letter-spacing: -0.03em; }
+    .exp-num span { color: var(--accent); font-size: 1.3rem; }
+    .exp-num-lbl { font-size: 0.73rem; color: rgba(255,255,255,0.35); margin-top: 3px; }
+
+    /* ============================================================
+       EDUCATION
+    ============================================================ */
+    #education { padding: 8rem 0; background: var(--bg); }
+
+    .edu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 3.5rem; }
+
+    .edu-card {
+      background: var(--bg-alt); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); padding: 2rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .edu-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--card-shadow-hover);
+    }
+    .edu-icon { font-size: 1.5rem; color: var(--accent); margin-bottom: 1rem; }
+    .edu-badge {
+      display: inline-flex; align-items: center;
+      padding: 0.2rem 0.7rem; border-radius: 999px;
+      font-size: 0.72rem; font-weight: 600; margin-bottom: 1rem;
+    }
+    .badge-active { background: rgba(0,113,227,0.1); color: var(--accent); }
+    .badge-done   { background: rgba(26,122,74,0.1); color: var(--green); }
+    .edu-date { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.3rem; letter-spacing: 0.04em; }
+    .edu-degree {
+      font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 700;
+      letter-spacing: -0.01em; margin-bottom: 0.25rem; color: var(--text-dark);
+    }
+    .edu-school { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .edu-courses { font-size: 0.8rem; color: var(--text-muted); font-weight: 300; line-height: 1.6; }
+
+    /* ============================================================
+       SKILLS
+    ============================================================ */
+    #skills { padding: 8rem 0; background: var(--bg-alt); }
+
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 3.5rem; }
+
+    .skill-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); padding: 2rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--card-shadow-hover);
+    }
+    .skill-cat-icon { font-size: 1.6rem; color: var(--accent); margin-bottom: 1rem; }
+    .skill-cat-name {
+      font-family: 'Sora', sans-serif; font-size: 0.95rem; font-weight: 700;
+      letter-spacing: -0.01em; color: var(--text-dark); margin-bottom: 1.25rem;
+    }
+    .skill-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .skill-chip {
+      background: var(--bg-alt); border: 1px solid var(--border);
+      border-radius: 999px; padding: 0.3rem 0.85rem;
+      font-size: 0.82rem; font-weight: 400; color: var(--text-mid);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .skill-chip:hover { border-color: var(--accent); color: var(--accent); }
+    .skill-chip.highlight {
+      background: var(--accent-soft); border-color: transparent; color: var(--accent); font-weight: 500;
+    }
+
+    /* ============================================================
+       CONTACT
+    ============================================================ */
+    #contact { padding: 8rem 0; background: var(--bg); }
+
+    .contact-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+    .contact-title {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800; letter-spacing: -0.04em; line-height: 1.05;
+      color: var(--text-dark); margin-bottom: 1.5rem;
+    }
+    .contact-title em { font-style: normal; color: var(--accent); }
+    .contact-sub { font-size: 1.1rem; color: var(--text-muted); font-weight: 300; line-height: 1.7; margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+    .contact-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 3.5rem; }
+
+    .contact-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+      padding-top: 2.5rem; border-top: 1px solid var(--border);
+    }
+    .contact-item { text-align: center; }
+    .contact-item i { color: var(--text-muted); font-size: 1rem; margin-bottom: 0.4rem; display: block; }
+    .contact-item p { font-size: 0.88rem; color: var(--text-muted); font-weight: 300; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: var(--bg-dark); color: rgba(255,255,255,0.45);
+      padding: 2.5rem 1.5rem;
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .footer-logo { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1rem; color: #fff; letter-spacing: -0.02em; }
+    .footer-logo span { color: var(--accent); }
+
+    .social-icons { display: flex; gap: 0.75rem; }
+    .social-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.5);
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .social-icon:hover { border-color: rgba(255,255,255,0.5); color: #fff; transform: translateY(-3px); }
+    .footer-copy { font-size: 0.78rem; }
+
+
+    /* --- NUOVI STILI PER LA SEZIONE HERO CON FOTO --- */
+
+    /* Contenitore flessibile che racchiude foto e testo */
+    .hero-flex-wrapper {
+      display: flex;
+      flex-direction: column; /* Su mobile sta tutto in colonna */
+      align-items: center;
+      gap: 2rem; /* Spazio tra foto e testo */
+    }
+
+    /* Contenitore specifico per la foto */
+    .hero-photo-container {
+      flex-shrink: 0; /* Evita che la foto si schiacci */
+    }
+
+    /* Stile della foto stessa */
+    .profile-photo {
+      width: 180px;      /* Dimensione di partenza su mobile */
+      height: 180px;     /* Quadrata per farla venire tonda */
+      object-fit: cover; /* Ritaglia l'immagine se non è quadrata */
+      border-radius: 50%; /* La rende perfettamente tonda */
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Ombra morbida professionale */
+      border: 3px solid #FFFFFF; /* Un bordino bianco per stacco */
+    }
+
+    /* Contenitore del testo (nome, descrizione, bottoni) */
+    .hero-text-content {
+      max-width: 100%;
+    }
+
+    /* --- MEDIA QUERY SPECIFICA PER HERO SU DESKTOP --- */
+    /* Quando lo schermo è più grande di 768px, cambia il layout */
+    @media (min-width: 769px) {
+      .hero-flex-wrapper {
+        flex-direction: row; /* Mette foto e testo uno di fianco all'altro */
+        text-align: left;    /* Allinea il testo a sinistra invece che al centro */
+        justify-content: center;
+        gap: 4rem; /* Aumenta lo spazio tra foto e testo su desktop */
+      }
+
+      /* Su desktop la foto diventa un po' più grande */
+      .profile-photo {
+        width: 280px;
+        height: 280px;
+      }
+
+      /* Su desktop il testo ha una larghezza massima diversa */
+      .hero-text-content {
+        max-width: 650px;
+      }
+
+      /* Allinea i bottoni a sinistra su desktop */
+      .hero-buttons-container {
+        justify-content: flex-start !important;
+      }
+      
+      /* Rimuove il margine automatico dalla descrizione su desktop */
+      #hero p {
+          margin-left: 0 !important;
+          margin-right: 0 !important;
+      }
+    }
+
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 900px) {
+      .about-grid, .exp-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .edu-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 680px) {
+      .nav-links, .btn-cv { display: none; }
+      .hamburger { display: flex; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .contact-strip { grid-template-columns: 1fr; gap: 1rem; }
+      .hero-stats { flex-direction: column; gap: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================================================================
+     NAVBAR
+================================================================ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo" style="font-weight: 800; font-size: 1.2rem;">FP</a>
+
+    <ul class="nav-links">
+      <li><a href="#about">Chi Sono</a></li>
+      <li><a href="#projects">Progetti</a></li>
+      <li><a href="#experience">Esperienza</a></li>
+      <li><a href="#education">Formazione</a></li>
+      <li><a href="#skills">Competenze</a></li>
+      <li><a href="#contact">Contatti</a></li>
+    </ul>
+
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu">
+    <a href="#about" onclick="closeMobileMenu()">Chi Sono</a>
+    <a href="#projects" onclick="closeMobileMenu()">Progetti</a>
+    <a href="#experience" onclick="closeMobileMenu()">Esperienza</a>
+    <a href="#education" onclick="closeMobileMenu()">Formazione</a>
+    <a href="#skills" onclick="closeMobileMenu()">Competenze</a>
+    <a href="#contact" onclick="closeMobileMenu()">Contatti</a>
+    <a href="Federico_Piovano_CV__2___1_.pdf" download class="btn-cv">
+      <i class="fa-solid fa-download" style="font-size:0.7rem;"></i> Scarica CV
+    </a>
+  </div>
+</nav>
+
+
+<!-- ================================================================
+     HERO
+================================================================ -->
+<section id="hero" style="background: #fff; padding: 8rem 0 4rem;">
+  <div class="section-wrap">
+
+    <div class="hero-flex-wrapper">
+
+      <div class="hero-photo-container" data-aos="fade-right" data-aos-duration="800">
+        <img src="foto-profilo.png" alt="Federico Piovano" class="profile-photo">
+      </div>
+
+      <div class="hero-text-content">
+        
+        <div data-aos="fade-up" data-aos-duration="700">
+          <div class="hero-label" style="background: #E8F0FD; color: #0071E3; padding: 0.5rem 1.2rem; font-size: 0.85rem; border-radius: 999px; display: inline-flex; align-items: center; font-weight: 600; margin-bottom: 1.5rem;">
+            <span class="dot-green"></span> Disponibile per tirocinio.
+          </div>
+        </div>
+
+        <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+          <h1 style="font-family: 'Sora', sans-serif; font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.04em; margin-bottom: 1.5rem;">
+            Federico<br/><span style="color: #0071E3;">Piovano</span>
+          </h1>
+        </div>
+
+        <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+          <p style="font-size: clamp(1.1rem, 2vw, 1.3rem); color: #424245; line-height: 1.6; font-weight: 400; margin-bottom: 2.5rem;">
+            Studente <strong>M.Sc. in Ingegneria della Produzione Industriale</strong> con doppia laurea Ingegneria e Business. 
+            Capace di trasformare dati complessi in insight strategici forte dell'esperienza in <strong>Maserati</strong>. 
+            Focalizzato su processi produttivi, logistica e sistemi informativi.
+          </p>
+        </div>
+
+        <div class="hero-buttons-container" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300" style="display: flex; gap: 1rem;">
+          <a href="PiovanoFederico_CV.pdf" download class="btn-primary" style="background: #0071E3; padding: 1rem 2.5rem; border-radius: 15px; font-weight: 600;">
+            <i class="fa-solid fa-arrow-down"></i> Scarica CV
+          </a>
+          <a href="#contact" class="btn-outline" style="padding: 1rem 2.5rem; border-radius: 15px; border: 1px solid #D2D2D7; font-weight: 500;">
+            Contattami <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+      </div> </div> </div>
+</section>
+
+
+<!-- ================================================================
+     ABOUT
+================================================================ -->
+<section id="about">
+  <div class="section-wrap">
+
+    <div data-aos="fade-up">
+      <p class="section-eyebrow">Chi Sono</p>
+      <h2 class="section-title" style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 0.5rem;">
+        Ingegneria, dati<br/>e visione strategica.
+      </h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="about-grid" style="margin-top: 3.5rem;">
+
+      <div class="about-text" data-aos="fade-right" data-aos-delay="100">
+    <p>
+        Studente in un percorso di <strong>doppia laurea</strong> in <strong>Ingegneria della Produzione Industriale</strong> e <strong>Business</strong>. 
+        Il mio percorso accademico si è svolto tra il Politecnico di Torino e la Technological University of the Shannon (Irlanda), costruendo un profilo ibrido che unisce rigore analitico e visione strategica.
+    </p>
+    <p>
+        La mia formazione integra la pianificazione della produzione e la logistica con l'analisi dei dati e l'innovazione di processo, 
+        permettendomi di ottimizzare sistemi complessi attraverso solide basi in controllo di gestione e financial management.
+    </p>
+
+
+        <div class="about-tags">
+          <span class="tag"><i class="fa-solid fa-industry"></i> Industrial Engineering</span>
+          <span class="tag"><i class="fa-solid fa-chart-line"></i> Data Analysis</span>
+          <span class="tag"><i class="fa-solid fa-boxes-stacked"></i> Logistics & Supply Chain</span>
+          <span class="tag"><i class="fa-solid fa-lightbulb"></i> Innovation Management</span>
+          <span class="tag"><i class="fa-solid fa-gears"></i> KPI Design</span>
+        </div>
+      </div>
+
+      <div class="about-visual" data-aos="fade-left" data-aos-delay="200">
+        <p class="about-quote">
+          "Sviluppo di KPI per il Monitoraggio dei Costi di Garanzia nel Settore Automotive: Il Caso Maserati."
+        </p>
+        <p class="about-quote-attr">Titolo Tesi di Laurea · Politecnico di Torino · 2024</p>
+        <div class="about-metrics" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+  
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <img src="polito_logo.png" alt="PoliTo" style="height: 35px; width: auto; margin-bottom: 12px; opacity: 0.7; filter: brightness(0) invert(1);">
+            <div class="metric-val" style="line-height: 1.2;">109<span>/110</span></div>
+            <div class="metric-lbl" style="text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.65rem; opacity: 0.5;">Voto di Laurea</div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <img src="maserati_logo.png" alt="Maserati" style="height: 35px; width: auto; margin-bottom: 12px; opacity: 0.7; filter: brightness(0) invert(1);">
+            <div class="metric-val" style="line-height: 1.2;">5<span>mo</span></div>
+            <div class="metric-lbl" style="text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.65rem; opacity: 0.5;">Internship Maserati</div>
+        </div>
+
+</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     PROJECTS (Casi Studio)
+================================================================ -->
+<section id="projects">
+  <div class="section-wrap">
+
+    <div style="text-align: center;" data-aos="fade-up">
+      <p class="section-eyebrow">Portfolio</p>
+      <h2 class="section-title" style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 0.5rem;">Casi Studio Selezionati</h2>
+      <div class="divider center"></div>
+    </div>
+
+    <div class="projects-grid">
+
+        <div class="project-card" data-aos="fade-up">
+          <div class="project-card-inner">
+            
+            <div class="project-content">
+              <div class="project-number">Progetto 01 — Tesi di Laurea</div>
+              
+              <h3 class="project-title" style="margin-bottom: 0.5rem;">Sistema KPI predittivi per analisi dei costi di garanzia — Maserati</h3>
+              
+              <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">
+                Pivot Table &nbsp;•&nbsp; Dashboards &nbsp;•&nbsp; Statistica Descrittiva &nbsp;•&nbsp; Macro Excel
+              </p>
+            <ul class="project-star-list">
+              <li class="project-star-item">
+                <div class="star-icon">🔍</div>
+                <div><strong>Problema:</strong> I picchi del Costo per Veicolo (CPV) erano rilevabili solo dopo 9 mesi dalla produzione, rendendo impossibile un controllo proattivo dei budget.</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">⚙️</div>
+                <div><strong>Azione:</strong> Analisi quantitativa su 10+ indicatori statistici, e ingegnerizzazione dell'indice <strong>CMu - Mediana</strong> per rilevare asimmetrie nella distribuzione dei costi e generare alert precoci e predittivi.</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">📊</div>
+                <div><strong>Risultati:</strong> Sistema di warning basato su dati costantemente disponibili, indipendenti dai volumi di vendita, con stabilità crescente all'aumentare del campione.</div>
+              </li>
+            </ul>
+          </div>
+          <div class="project-image-area" style="background: #fff; padding: 20px;">
+            <img src="Maserati Dashbord.png" alt="Dashboard Maserati KPI" style="width: 90%; height: 100%; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+        </div>
+      </div>
+
+<div class="project-card" data-aos="fade-up">
+        <div class="project-card-inner">
+          
+          <div class="project-content">
+            <div class="project-number">Progetto 02 — Progettazione Impianti</div>
+            
+            <h3 class="project-title" style="margin-bottom: 0.5rem;">Studio di un Sito Logistico-Produttivo</h3>
+            
+            <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">
+              CAD 2D &nbsp;•&nbsp; Ottimizzazione Layout &nbsp;•&nbsp; Logistica Interna &nbsp;•&nbsp; Analisi Flussi
+            </p>
+
+            <ul class="project-star-list">
+              <li class="project-star-item">
+                <div class="star-icon">🔍</div>
+                <div><strong>Contesto:</strong> Progettazione integrale di uno stabilimento di lavorazione e assemblaggio, con necessità di dimensionare analiticamente macchinari, operatori e aree di stoccaggio in base ai volumi.</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">⚙️</div>
+                <div><strong>Azione:</strong> Tracciamento dei flussi (Spaghetti Chart), calcolo dei buffer ed elaborazione della planimetria tecnica CAD 2D, integrando severi vincoli di sicurezza ed ergonomia.</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">📊</div>
+                <div><strong>Risultati:</strong> Definizione di un layout Flow-line che minimizza i colli di bottiglia, ottimizza la saturazione delle macchine e integra un magazzino automatizzato riducendo i tempi morti.</div>
+              </li>
+            </ul>
+
+            <div style="margin-top: 1rem;">
+              <a href="LAYOUT STABILIMENTO.pdf" target="_blank" class="btn-primary" style="border-radius:12px; padding: 0.8rem 1.5rem; font-size: 0.85rem;">
+                <i class="fa-solid fa-map"></i> Apri Layout Stabilimento
+              </a>
+            </div>
+          </div>
+
+          <div class="project-image-area" style="background: var(--bg-alt); padding: 20px;">
+            <iframe 
+              src="REPORT IMPIANTI_4AC.pdf#toolbar=0&navpanes=0&scrollbar=0" 
+              width="90%" 
+              height="100%" 
+              style="border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--card-shadow); min-height: 400px;">
+            </iframe>
+          </div>
+
+        </div>
+      </div>
+
+<div class="project-card" data-aos="fade-up">
+        <div class="project-card-inner">
+          
+          <div class="project-content">
+            <div class="project-number">Progetto 03 — Energetica ed Ecologia</div>
+            
+            <h3 class="project-title" style="margin-bottom: 0.5rem;">Analisi Energetica di una Cartiera</h3>
+            
+            <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">
+              Analisi Termodinamica &nbsp;•&nbsp; Bilanci Energetici &nbsp;•&nbsp; Cogenerazione &nbsp;•&nbsp; Sizer
+            </p>
+
+            <ul class="project-star-list">
+              <li class="project-star-item">
+                <div class="star-icon">🔍</div>
+                <div><strong>Contesto:</strong> Ottimizzazione dell'efficienza energetica per un impianto di produzione carta da macero, mappando i fabbisogni termici ed elettrici sull'intero ciclo produttivo.</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">⚙️</div>
+                <div><strong>Azione:</strong> Applicazione del 1° principio della termodinamica per bilanci di massa/energia, calcolo delle variazioni entalpiche e studio di fattibilità per l'integrazione di un impianto di cogenerazione a ciclo Rankine.</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">📊</div>
+                <div><strong>Risultati:</strong> Dimensionamento dei generatori termici (2,23 kg/s vapore) e validazione della cogenerazione, con una riduzione stimata dell'energia primaria del 17% e delle emissioni di CO₂ del 39%.</div>
+              </li>
+            </ul>
+
+
+          </div>
+
+          <div class="project-image-area" style="background: var(--bg-alt); padding: 20px;">
+            <iframe 
+              src="Analisi energetica di una cartiera - Copia.pdf#toolbar=0&navpanes=0&scrollbar=0" 
+              width="90%" 
+              height="100%" 
+              style="border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--card-shadow); min-height: 400px;">
+            </iframe>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="project-card" data-aos="fade-up">
+        <div class="project-card-inner">
+          
+          <div class="project-content">
+            <div class="project-number">Progetto 04 — Quality Management Systems</div>
+            
+            <h3 class="project-title" style="margin-bottom: 0.5rem;">Analisi Difettosità e Controllo Qualità</h3>
+            
+            <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">
+              FMEA &nbsp;•&nbsp; Ishikawa & Pareto &nbsp;•&nbsp; Root Cause Analysis &nbsp;•&nbsp; Carte di Controllo
+            </p>
+
+            <ul class="project-star-list">
+              <li class="project-star-item">
+                <div class="star-icon">🔍</div>
+                <div><strong>Contesto:</strong> Analisi delle non conformità in un processo produttivo industriale con l'obiettivo di identificare i difetti più critici e ridurre il tasso di scarti fuori dai limiti di tolleranza.</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">⚙️</div>
+                <div><strong>Azione:</strong> Applicazione dei framework di Total Quality Management: Diagramma di Pareto per la priorizzazione, Ishikawa per la Root Cause Analysis e FMEA per la valutazione quantitativa dei rischi di guasto.</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">📊</div>
+                <div><strong>Risultati:</strong> Individuazione della causa radice delle anomalie, definizione di azioni correttive mirate e abbattimento drastico dell'Indice di Priorità del Rischio (IPR), riportando il processo sotto controllo statistico.</div>
+              </li>
+            </ul>
+
+           
+          </div>
+
+          <div class="project-image-area" style="background: var(--bg-alt); padding: 20px; ">
+            
+            <iframe 
+              src="Report FINALE_QMS.pdf#toolbar=0&navpanes=0&scrollbar=0" 
+              width= "90%" 
+              height= "100%"
+              style="border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--card shadow); min-height: 400px;">
+            </iframe>
+
+          </div>
+
+        </div>
+      </div>
+  <div class="project-card" data-aos="fade-up">
+          <div class="project-card-inner">
+            
+            <div class="project-content">
+              <div class="project-number">Progetto 05 — Strategic Management</div>
+              
+              <h3 class="project-title" style="margin-bottom: 0.5rem;">Business Capstone: Simulazione e Strategia</h3>
+              
+              <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">
+                Business Strategy &nbsp;•&nbsp; Financial Analysis &nbsp;•&nbsp; Competitive Advantage &nbsp;•&nbsp; KPI
+              </p>
+
+              <ul class="project-star-list">
+                <li class="project-star-item">
+                  <div class="star-icon">🔍</div>
+                  <div><strong>Contesto:</strong> Gestione direzionale di un'azienda all'interno di un ambiente competitivo simulato, con la responsabilità di massimizzare il valore per gli azionisti e le performance sul mercato.</div>
+                </li>
+                <li class="project-star-item">
+                  <div class="star-icon">⚙️</div>
+                  <div><strong>Azione:</strong> Analisi del settore e definizione della strategia competitiva, prendendo decisioni integrate su produzione, marketing e finanza basate sull'analisi dei bilanci e dei report di mercato.</div>
+                </li>
+                <li class="project-star-item">
+                  <div class="star-icon">📊</div>
+                  <div><strong>Risultati:</strong> Ottimizzazione dei KPI finanziari aziendali (EPS, ROE, Credit Rating), consolidamento del posizionamento del brand e redazione di un report strategico formale per il Board of Directors.</div>
+                </li>
+              </ul>
+
+              
+            </div>
+
+          <div class="project-image-area" style="background: var(--bg-alt); padding: 20px; ">
+            
+            <iframe 
+              src="Business Capstone Draft.pdf#toolbar=0&navpanes=0&scrollbar=0" 
+              width= "90%" 
+              height= "100%"
+              style="border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--card shadow); min-height: 400px;">
+            </iframe>
+
+          </div>
+
+          </div>
+        </div>
+    <div class="project-card" data-aos="fade-up">
+        <div class="project-card-inner">
+          
+          <div class="project-content">
+            <div class="project-number">Progetto 06 — Applied Strategic Marketing</div>
+            
+            <h3 class="project-title" style="margin-bottom: 0.5rem;">Espansione Internazionale — Caffarel</h3>
+            
+            <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">
+              Market Expansion &nbsp;•&nbsp; Product Innovation &nbsp;•&nbsp; Pricing Strategy &nbsp;•&nbsp; Localization
+            </p>
+
+            <ul class="project-star-list">
+              <li class="project-star-item">
+                <div class="star-icon">🔍</div>
+                <div><strong>Contesto:</strong> Sviluppare una strategia di espansione globale per lo storico brand Caffarel, puntando all'ingresso nel mercato del <em>luxury gifting</em> negli Emirati Arabi Uniti (Dubai).</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">⚙️</div>
+                <div><strong>Azione:</strong> Ideazione della linea "The Caffarel Emirates", fondendo il tradizionale gianduja con ingredienti locali (pistacchio, kataifi, zafferano, cardamomo). Definizione del posizionamento, del packaging (The Moon Box) e della strategia di prezzo.</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">📊</div>
+                <div><strong>Risultati:</strong> Progettazione di un piano di marketing interculturale mirato e supportato da campagne di storytelling per valorizzare l'heritage del prodotto originale (come la storia del Gianduja) adattandolo ai gusti del nuovo target.</div>
+              </li>
+            </ul>
+
+            </div>
+
+          <div class="project-image-area" style="background: var(--bg-alt); padding: 20px; ">
+            
+            <iframe 
+              src="Caffarel Marketing Proposal.pdf#toolbar=0&navpanes=0&scrollbar=0" 
+              width= "90%" 
+              height= "100%"
+              style="border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--card shadow); min-height: 400px;">
+            </iframe>
+
+          </div>
+
+        </div>
+      </div>
+    <div class="project-card" data-aos="fade-up">
+        <div class="project-card-inner">
+          
+          <div class="project-content">
+            <div class="project-number">Progetto 07 — Supply Chain Management</div>
+            
+            <h3 class="project-title" style="margin-bottom: 0.5rem;">Analisi Supply Chain Digitale — Netflix</h3>
+            
+            <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">
+              Value Chain &nbsp;•&nbsp; SWOT Analysis &nbsp;•&nbsp; Digital Distribution &nbsp;•&nbsp; Competitive Strategy
+            </p>
+
+            <ul class="project-star-list">
+              <li class="project-star-item">
+                <div class="star-icon">🔍</div>
+                <div><strong>Contesto:</strong> Analizzare le logiche di supply chain nel settore dell'intrattenimento digitale, focalizzandosi sul modello operativo di Netflix e sul confronto competitivo con Disney+.</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">⚙️</div>
+                <div><strong>Azione:</strong> Mappatura dell'intera catena del valore (acquisizione, preparazione e distribuzione dei contenuti). Analisi approfondita dell'infrastruttura logistica digitale, inclusa l'ottimizzazione dello streaming globale tramite il sistema proprietario Open Connect CDN.</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">📊</div>
+                <div><strong>Risultati:</strong> Valutazione strategica tramite matrice SWOT, evidenziando come l'integrazione verticale e l'efficienza nella logistica dei dati rappresentino il vero vantaggio competitivo nei modelli di business Over-The-Top (OTT).</div>
+              </li>
+            </ul>
+
+            </div>
+
+          <div class="project-image-area" style="background: var(--bg-alt); padding: 20px; ">
+            
+            <iframe 
+              src="SUPPLY PROJECT.pdf#toolbar=0&navpanes=0&scrollbar=0" 
+              width= "90%" 
+              height= "100%"
+              style="border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--card shadow); min-height: 400px;">
+            </iframe>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="project-card" data-aos="fade-up">
+        <div class="project-card-inner">
+          
+          <div class="project-content">
+            <div class="project-number">Progetto 08 — Strategie e Innovazione</div>
+            
+            <h3 class="project-title" style="margin-bottom: 0.5rem;">Analisi Strategica e Rilancio — Renault Group</h3>
+            
+            <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">
+              Turnaround Strategy &nbsp;•&nbsp; Financial Analysis &nbsp;•&nbsp; Circular Economy &nbsp;•&nbsp; Automotive
+            </p>
+
+            <ul class="project-star-list">
+              <li class="project-star-item">
+                <div class="star-icon">🔍</div>
+                <div><strong>Contesto:</strong> Analisi della profonda crisi finanziaria e d'identità del Gruppo Renault, affrontando la transizione elettrica e la necessità di passare da una logica di volumi a una di redditività (piano "Renaulution").</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">⚙️</div>
+                <div><strong>Azione:</strong> Esame delle tre fasi del rilancio aziendale (Resurrection, Renovation, Revolution) e sviluppo della proposta strategica autonoma "ReVitalize", mirata a consolidare i segmenti premium, l'economia circolare e la digitalizzazione industriale.</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">📊</div>
+                <div><strong>Risultati:</strong> Valutazione della fattibilità di trasformazione in una "tech-company sostenibile", analizzando i flussi di ricavo, i costi di ristrutturazione e le strategie per difendere i margini operativi in un mercato altamente saturo.</div>
+              </li>
+            </ul>
+
+            </div>
+
+          <div class="project-image-area" style="background: var(--bg-alt); padding: 20px; ">
+            
+            <iframe 
+              src="Report Finale team Strategy.pdf#toolbar=0&navpanes=0&scrollbar=0" 
+              width= "90%" 
+              height= "100%"
+              style="border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--card shadow); min-height: 400px;">
+            </iframe>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="project-card" data-aos="fade-up">
+        <div class="project-card-inner">
+          
+          <div class="project-content">
+            <div class="project-number">Progetto 09 — Sistemi di Produzione Innovativi</div>
+            
+            <h3 class="project-title" style="margin-bottom: 0.5rem;">Progettazione CAD/CAM e Lavorazioni CNC</h3>
+            
+            <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">
+              Autodesk Fusion 360 &nbsp;•&nbsp; CAM Programming &nbsp;•&nbsp; Toolpath Optimization &nbsp;•&nbsp; CNC Machining
+            </p>
+
+            <ul class="project-star-list">
+              <li class="project-star-item">
+                <div class="star-icon">🔍</div>
+                <div><strong>Contesto:</strong> Sviluppo dell'intero ciclo di lavorazione per un componente meccanico assegnato dall'ufficio tecnico, dall'analisi critica del disegno fino alla stima dei tempi di produzione.</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">⚙️</div>
+                <div><strong>Azione:</strong> Realizzazione del modello CAD 3D su Fusion 360 e programmazione dei percorsi utensile (CAM). Selezione strategica degli utensili (frese per foratura, centrinatori) e definizione analitica dei parametri di taglio, tra cui velocità mandrino (rpm) e feedrate.</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">📊</div>
+                <div><strong>Risultati:</strong> Minimizzazione dell'<em>Estimated Cycle Time</em> e corretta configurazione delle strategie di lavorazione, culminate nella redazione del foglio di lavoro operativo per l'attrezzaggio in macchina.</div>
+              </li>
+            </ul>
+
+            </div>
+
+            <div class="project-image-area" style="background: var(--bg-alt); padding: 3rem 2rem; display: flex; align-items: center; justify-content: center; min-height: 400px;">
+            
+            <img 
+              src="Progetto_Fusion1.png" 
+              alt="Progetto CAD/CAM Fusion 360" 
+              style="width: 100%; max-width: 320px; height: auto; border-radius: 8px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); object-fit: contain;">
+
+          </div>
+
+        </div>
+      
+      </div>
+      <div class="project-card" data-aos="fade-up">
+        <div class="project-card-inner">
+          
+          <div class="project-content">
+            <div class="project-number">Progetto 10 — Operations & Supply Chain</div>
+            
+            <h3 class="project-title" style="margin-bottom: 0.5rem;">Programmazione Produzione e Logistica</h3>
+            
+            <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">
+              Demand Forecasting &nbsp;•&nbsp; Inventory Management &nbsp;•&nbsp; MRP &nbsp;•&nbsp; Magazzini &nbsp;•&nbsp; Project Management
+            </p>
+
+            <ul class="project-star-list">
+              <li class="project-star-item">
+                <div class="star-icon">🔍</div>
+                <div><strong>Contesto:</strong> Applicazione di modelli analitici e gestionali per l'ottimizzazione dell'intera supply chain manifatturiera, dalla previsione della domanda fino alla schedulazione avanzata di progetto.</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">⚙️</div>
+                <div><strong>Azione:</strong> Sviluppo di modelli previsionali (Exponential Smoothing, Regressione), dimensionamento di lotti (EOQ/EMQ) ed elaborazione di piani MRP. Progettazione del layout per magazzini tradizionali e automatizzati (AS/RS) e strutturazione WBS/Gantt per cantieri internazionali.</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">📊</div>
+                <div><strong>Risultati:</strong> Definizione di politiche di riordino per target di servizio del 99,7%, minimizzazione dei percorsi di picking tramite logiche ABC (AR, MR, BR) e ottimizzazione del percorso critico (CPM) integrando logiche Pull e Just-in-Time.</div>
+              </li>
+            </ul>
+
+            <div style="margin-top: 1rem;">
+              <a href="Esercitazioni_Logistica.pdf" target="_blank" class="btn-primary" style="border-radius:12px; padding: 0.8rem 1.5rem; font-size: 0.85rem;">
+                <i class="fa-solid fa-boxes-stacked"></i> Apri Esercitazioni Complete
+              </a>
+            </div>
+          </div>
+
+          <div class="project-image-area" style="background: var(--bg-alt); padding: 3rem 2rem; display: flex; align-items: center; justify-content: center; min-height: 400px;">
+            
+            <img 
+              src="MRP.png" 
+              alt="Esercitazioni Produzione e Logistica" 
+              style="width: 100%; max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); object-fit: contain;">
+
+          </div>
+
+        </div>
+      </div>
+<div class="project-card" data-aos="fade-up">
+        <div style="display: flex; flex-direction: column;">
+          
+          <div class="project-content" style="padding-bottom: 2rem;">
+            <div class="project-number">Progetto 11 — Innovazione dei Processi Produttivi</div>
+            
+            <h3 class="project-title" style="margin-bottom: 0.5rem;">Simulazione a Eventi Discreti e Factory Physics</h3>
+            
+            <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">
+              FlexSim &nbsp;•&nbsp; Throughput Analysis &nbsp;•&nbsp; Cycle Time &nbsp;•&nbsp; Bottleneck Optimization
+            </p>
+
+            <ul class="project-star-list">
+              <li class="project-star-item">
+                <div class="star-icon">🔍</div>
+                <div><strong>Contesto:</strong> Valutazione delle performance e ottimizzazione di un sistema produttivo complesso, caratterizzato da variabilità intrinseca, guasti, tempi di setup e vincoli di capacità dei buffer.</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">⚙️</div>
+                <div><strong>Azione:</strong> Sviluppo di un modello a eventi discreti tramite <strong>FlexSim</strong> per la simulazione del flusso di fabbrica. Parallelamente, calcolo analitico basato sulle leggi della Factory Physics per determinare l'impatto dei detrattori su stabilità e tempi di attraversamento.</div>
+              </li>
+              <li class="project-star-item">
+                <div class="star-icon">📊</div>
+                <div><strong>Risultati:</strong> Validazione incrociata tra i dati teorici e gli output estratti dalle dashboard di simulazione. Calcolo accurato di Work-In-Process (WIP), Cycle Time (CT) e Throughput (TH), identificando colli di bottiglia ed efficienza reale dei macchinari.</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="project-image-area" style="background: var(--bg-alt); padding: 2rem; display: flex; align-items: center; justify-content: center; min-height: auto;">
+            
+            <img 
+              src="Screen_Flexsim.png" 
+              alt="Modello di Simulazione FlexSim" 
+              style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 15px 35px rgba(0,0,0,0.1);">
+
+          </div>
+
+        </div>
+      </div>
+
+      </div>
+    </div>
+</section>
+
+
+<!-- ================================================================
+     EXPERIENCE
+================================================================ -->
+<section id="experience">
+  <div class="section-wrap">
+
+    <div data-aos="fade-up">
+      <p class="section-eyebrow">Carriera</p>
+      <h2 class="section-title" style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 0.5rem;">Esperienza Professionale</h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="exp-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; margin-top: 3rem;">
+
+      <div class="exp-timeline-container">
+        
+        <div class="timeline-item" data-aos="fade-right" data-aos-delay="100" style="display: flex; gap: 24px; margin-bottom: 2rem;">
+          <div class="timeline-left" style="display: flex; flex-direction: column; align-items: center; width: 20px; flex-shrink: 0;">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="timeline-right" style="flex: 1;">
+            <p class="tl-date">Maggio 2023 – Ottobre 2023</p>
+            <h3 class="tl-role">Performance Data Analysis Intern</h3>
+            <p class="tl-company">Maserati · Torino, Italia</p>
+            
+              <div class="tl-bullets" style="padding: 0; margin: 1rem 0 0 0; display: flex; flex-direction: column; gap: 0.8rem;">
+              
+              <div style="display: flex; align-items: flex-start; gap: 10px;">
+                <span style="color: var(--accent); font-size: 1.2rem; line-height: 1; margin-top: 0.1rem; flex-shrink: 0;">&bull;</span>
+                <span style="line-height: 1.5; color: var(--text-mid);">
+                  Conduzione di uno <strong>studio statistico approfondito sui dati storici dei costi di garanzia</strong> dell'intero parco auto circolante, finalizzato all'identificazione di trend, distribuzioni asimmetriche e anomalie finanziarie.
+                </span>
+              </div>
+              
+              <div style="display: flex; align-items: flex-start; gap: 10px;">
+                <span style="color: var(--accent); font-size: 1.2rem; line-height: 1; margin-top: 0.1rem; flex-shrink: 0;">&bull;</span>
+                <span style="line-height: 1.5; color: var(--text-mid);">
+                  Ingegnerizzazione di un modello predittivo basato su indicatori statistici avanzati per anticipare le fluttuazioni del <strong>Cost Per Vehicle (CPV)</strong> con mesi di anticipo rispetto al consolidamento standard dei dati.
+                </span>
+              </div>
+              
+              <div style="display: flex; align-items: flex-start; gap: 10px;">
+                <span style="color: var(--accent); font-size: 1.2rem; line-height: 1; margin-top: 0.1rem; flex-shrink: 0;">&bull;</span>
+                <span style="line-height: 1.5; color: var(--text-mid);">
+                  Implementazione di dashboard analitiche e collaborazione cross-funzionale con il team Quality Management (QMS) per monitorare il comportamento della flotta e validare le strategie di contenimento dei costi.
+                </span>
+              </div>
+
+            </div>
+            
+            <div class="tl-tech" style="margin-top: 1.5rem;">
+              <span class="tech-chip">Advanced Excel</span>
+              <span class="tech-chip">Power BI</span>
+              <span class="tech-chip">Statistical Modeling</span>
+              <span class="tech-chip">Predictive Analysis</span>
+              <span class="tech-chip">KPI Design</span>
+              <span class="tech-chip">Warranty Cost Analysis</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-aos="fade-right" data-aos-delay="200" style="display: flex; gap: 24px; margin-top: 2.5rem;">
+          <div class="timeline-left" style="display: flex; flex-direction: column; align-items: center; width: 20px; flex-shrink: 0;">
+            <div class="tl-dot" style="background: var(--green); box-shadow: 0 0 0 3px rgba(26,122,74,0.2);"></div>
+          </div>
+          <div class="timeline-right" style="flex: 1;">
+            <p class="tl-date">2018 – Presente</p>
+            <h3 class="tl-role" style="font-size:1.1rem;">Educatore Volontario</h3>
+            <p class="tl-company">GO Grugliasco Oratorio · Grugliasco, Italia</p>
+            <p style="line-height: 1.5; color: var(--text-mid)">
+              Formazione e accompagnamento di giovani delle scuole superiori, promuovendo i valori di comunità, lavoro di squadra e responsabilità sociale. Un impegno di 7+ anni che ha consolidato le mie capacità di comunicazione, problem-solving e gestione delle dinamiche di gruppo.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-highlight-container" data-aos="fade-left" data-aos-delay="300">
+        <div style="background: var(--bg-alt); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; box-shadow: var(--card-shadow); height: 100%;">
+          
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+            <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin: 0;">Project Spotlight</h4>
+            <img src="Maserati_Logo.png" alt="Maserati Logo" style="height: 35px; width: auto; object-fit: contain;">
+          </div>
+
+          <div style="margin-bottom: 1.8rem;">
+            <p style="font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 0.4rem;">Il Problema Operativo</p>
+            <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-mid); margin: 0;">
+              I picchi anomali del Costo per Veicolo (CPV) in garanzia risultavano identificabili solo con un ritardo strutturale di 9 mesi rispetto alla produzione, bloccando di fatto qualsiasi controllo proattivo del budget post-vendita.
+            </p>
+          </div>
+
+          <div style="margin-bottom: 1.8rem;">
+            <p style="font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 0.4rem;">La Soluzione Implementata</p>
+            <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-mid); margin: 0;">
+              Sviluppo di un <strong>modello statistico predittivo di early warning</strong>. Analizzando le distribuzioni di costo e isolando le derive finanziarie, è stato strutturato un indicatore solido per anticipare l'impatto economico della flotta, svincolandolo dalle repentine fluttuazioni volumetriche del parco auto circolante.
+            </p>
+          </div>
+
+          <div>
+            <p style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: 0.8rem;">Metodologia Applicata</p>
+            
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.8rem;">
+              <li style="font-size: 0.9rem; color: var(--text-mid); display: flex; align-items: flex-start; gap: 0.8rem;">
+                <i class="fa-solid fa-chart-line" style="color: var(--accent); margin-top: 0.2rem; flex-shrink: 0;"></i> 
+                <span style="line-height: 1.4;">Data mining e modellazione statistica sui database storici dei rimborsi di garanzia.</span>
+              </li>
+              <li style="font-size: 0.9rem; color: var(--text-mid); display: flex; align-items: flex-start; gap: 0.8rem;">
+                <i class="fa-solid fa-list-check" style="color: var(--accent); margin-top: 0.2rem; flex-shrink: 0;"></i> 
+                <span style="line-height: 1.4;">Backtesting del modello e automazione del sistema di alert all'interno dei report direzionali.</span>
+              </li>
+              <li style="font-size: 0.9rem; color: var(--text-mid); display: flex; align-items: flex-start; gap: 0.8rem;">
+                <i class="fa-solid fa-people-group" style="color: var(--accent); margin-top: 0.2rem; flex-shrink: 0;"></i> 
+                <span style="line-height: 1.4;">Cross-validation dei risultati e allineamento strategico con il Management tecnico.</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     EDUCATION
+================================================================ -->
+<section id="education" style="padding: 6rem 0; background: var(--bg-main);">
+  <div class="section-wrap">
+    
+    <div data-aos="fade-up">
+      <p class="section-eyebrow">Formazione</p>
+      <h2 class="section-title" style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 0.5rem;">Percorso Accademico</h2>
+      <div class="divider"></div>
+      <p style="color: var(--text-mid); max-width: 600px; margin-top: 1.5rem; line-height: 1.6;">
+        Un percorso multidisciplinare strutturato su un programma di Double Degree, progettato per fondere il rigore analitico dell'ingegneria con la visione strategica del management internazionale.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 3.5rem;">
+
+      <div data-aos="fade-up" data-aos-delay="100" style="background: var(--bg-alt); padding: 2.5rem; border-radius: 20px; border: 1px solid var(--border); box-shadow: var(--card-shadow); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <p style="font-size: 0.8rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Sett 2024 — Presente</p>
+          <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; line-height: 1.3;">M.Sc. Ingegneria della Produzione Industriale e dell'Innovazione Tecnologica</h3>
+          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem;">Politecnico di Torino · Italia</p>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.6rem;">
+            <li style="font-size: 0.9rem; color: var(--text-mid); display: flex; align-items: flex-start; gap: 8px;">
+              <span style="color: var(--accent); margin-top: 2px;">&bull;</span> Focus su Sistemi Logistici Avanzati e Innovazione
+            </li>
+            <li style="font-size: 0.9rem; color: var(--text-mid); display: flex; align-items: flex-start; gap: 8px;">
+              <span style="color: var(--accent); margin-top: 2px;">&bull;</span> Esami chiave: Logistica e Programmazione della Produzione, Finanza Aziendale, Strategie e Innovazione, Sistemi di Produzione Innovativi
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div data-aos="fade-up" data-aos-delay="200" style="background: var(--bg-alt); padding: 2.5rem; border-radius: 20px; border: 1px solid var(--border); box-shadow: var(--card-shadow); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <p style="font-size: 0.8rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Sett 2022 — Mag 2025</p>
+          <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; line-height: 1.3;">Bachelor of Business (Hons) <br><span style="font-size: 1rem; font-weight: 400; color: var(--text-mid);">Double Degree Program</span></h3>
+          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem;">Technological University of the Shannon · Irlanda</p>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.6rem;">
+            <li style="font-size: 0.9rem; color: var(--text-mid); display: flex; align-items: flex-start; gap: 8px;">
+              <span style="color: var(--accent); margin-top: 2px;">&bull;</span> Focus su Operations & Supply Chain, Mercati Finanziari, Gestione finanziaria e contabilità gestionale
+            </li>
+            <li style="font-size: 0.9rem; color: var(--text-mid); display: flex; align-items: flex-start; gap: 8px;">
+              <span style="color: var(--accent); margin-top: 2px;">&bull;</span> Esami chiave: Operations & Supply Chain Management, Financial & Management Accounting, Applied Strategic Marketing, Strategic Analysis, Financial Markets & Derivatives
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div data-aos="fade-up" data-aos-delay="300" style="background: var(--bg-alt); padding: 2.5rem; border-radius: 20px; border: 1px solid var(--border); box-shadow: var(--card-shadow); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <p style="font-size: 0.8rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Sett 2021 — Lug 2024</p>
+          <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; line-height: 1.3;">B.Sc. Ingegneria della Produzione Industriale</h3>
+          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem;">Politecnico di Torino · Italia</p>
+          
+          <div style="display: inline-block; background: rgba(0, 113, 227, 0.1); color: var(--accent); font-weight: 700; padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.85rem; margin-bottom: 1.5rem;">
+            Voto: 109/110
+          </div>
+
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.6rem;">
+            <li style="font-size: 0.9rem; color: var(--text-mid); display: flex; align-items: flex-start; gap: 8px;">
+              <span style="color: var(--accent); margin-top: 2px;">&bull;</span> Tesi: <em>"Sviluppo di KPI per il monitoraggio dei costi di garanzia: Il Caso Maserati"</em>
+            </li>
+            <li style="font-size: 0.9rem; color: var(--text-mid); display: flex; align-items: flex-start; gap: 8px;">
+              <span style="color: var(--accent); margin-top: 2px;">&bull;</span> Esami chiave: Basi di Dati e Sistemi Informativi, Ricerca Operativa, Impianti Industriali, Gestione di Fabbrica, Quality Management Systems (QMS)
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills" style="padding: 6rem 0; background: var(--bg-main);">
+  <div class="section-wrap">
+    
+    <div data-aos="fade-up">
+      <p class="section-eyebrow">Competenze</p>
+      <h2 class="section-title" style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 0.5rem;">Strumenti & Abilità</h2>
+      <div class="divider"></div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3.5rem;">
+
+      <div data-aos="zoom-in" data-aos-delay="100" style="background: var(--bg-alt); padding: 2.5rem; border-radius: 24px; border: 1px solid var(--border); box-shadow: var(--card-shadow);">
+        <i class="fa-solid fa-database" style="font-size: 2rem; color: var(--accent); margin-bottom: 1.5rem; display: block;"></i>
+        <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">Data Analytics & Code</h3>
+        <p style="font-size: 0.9rem; color: var(--text-mid); margin-bottom: 1.5rem; line-height: 1.5;">
+          Estrazione, manipolazione e visualizzazione di grandi moli di dati per supportare il decision-making direzionale.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          <span style="background: rgba(0,0,0,0.05); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">Python (Pandas)</span>
+          <span style="background: rgba(0,0,0,0.05); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">SQL</span>
+          <span style="background: rgba(0,0,0,0.05); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">Power BI</span>
+          <span style="background: rgba(0,0,0,0.05); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">Streamlit</span>
+          <span style="background: rgba(0,0,0,0.05); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">Data Mining</span>
+        </div>
+      </div>
+
+      <div data-aos="zoom-in" data-aos-delay="200" style="background: var(--bg-alt); padding: 2.5rem; border-radius: 24px; border: 1px solid var(--border); box-shadow: var(--card-shadow);">
+        <i class="fa-solid fa-network-wired" style="font-size: 2rem; color: var(--accent); margin-bottom: 1.5rem; display: block;"></i>
+        <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">Operations & Simulation</h3>
+        <p style="font-size: 0.9rem; color: var(--text-mid); margin-bottom: 1.5rem; line-height: 1.5;">
+          Modellazione a eventi discreti, ottimizzazione dei flussi logistici e programmazione della produzione.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          <span style="background: rgba(0,0,0,0.05); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">FlexSim</span>
+          <span style="background: rgba(0,0,0,0.05); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">Fusion 360 (CAD/CAM)</span>
+          <span style="background: rgba(0,0,0,0.05); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">Advanced Excel (VBA)</span>
+          <span style="background: rgba(0,0,0,0.05); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">MRP & Inventory</span>
+          <span style="background: rgba(0,0,0,0.05); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">Project Management</span>
+        </div>
+      </div>
+
+      <div data-aos="zoom-in" data-aos-delay="300" style="background: var(--bg-alt); padding: 2.5rem; border-radius: 24px; border: 1px solid var(--border); box-shadow: var(--card-shadow);">
+        <i class="fa-solid fa-chart-pie" style="font-size: 2rem; color: var(--accent); margin-bottom: 1.5rem; display: block;"></i>
+        <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">Business & Strategy</h3>
+        <p style="font-size: 0.9rem; color: var(--text-mid); margin-bottom: 1.5rem; line-height: 1.5;">
+          Progettazione di metriche prestazionali, contabilità gestionale e analisi strategica aziendale.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          <span style="background: rgba(0,0,0,0.05); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">KPI Design</span>
+          <span style="background: rgba(0,0,0,0.05); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">Forecasting</span>
+          <span style="background: rgba(0,0,0,0.05); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">Financial Analysis</span>
+          <span style="background: rgba(0,0,0,0.05); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">Supply Chain Strategy</span>
+        </div>
+      </div>
+
+      <div data-aos="zoom-in" data-aos-delay="400" style="background: var(--bg-alt); padding: 2.5rem; border-radius: 24px; border: 1px solid var(--border); box-shadow: var(--card-shadow);">
+        <i class="fa-solid fa-earth-europe" style="font-size: 2rem; color: var(--accent); margin-bottom: 1.5rem; display: block;"></i>
+        <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">Interpersonal & Certs</h3>
+        <p style="font-size: 0.9rem; color: var(--text-mid); margin-bottom: 1.5rem; line-height: 1.5;">
+          Comunicazione efficace in team interfunzionali, approccio proattivo al problem solving e certificazioni internazionali.
+        </p>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.6rem;">
+          <li style="font-size: 0.9rem; color: var(--text-mid); display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-check" style="color: var(--green);"></i> <strong>Inglese:</strong> Proficient (IELTS)
+          </li>
+          <li style="font-size: 0.9rem; color: var(--text-mid); display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-check" style="color: var(--green);"></i> <strong>MOS:</strong> MS Excel Advanced
+          </li>
+          <li style="font-size: 0.9rem; color: var(--text-mid); display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-check" style="color: var(--green);"></i> RUN-EU Challenges (SAP)
+          </li>
+          <li style="font-size: 0.9rem; color: var(--text-mid); display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-check" style="color: var(--green);"></i> Analytical Problem Solving
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     CONTACT
+================================================================ -->
+<section id="contact" style="padding: 6rem 0; background: var(--bg-alt);">
+  <div class="section-wrap" style="max-width: 900px; margin: 0 auto; text-align: center;">
+    
+    <div class="contact-inner" data-aos="fade-up" style="background: var(--bg-main); padding: 4rem 2rem; border-radius: 24px; border: 1px solid var(--border); box-shadow: var(--card-shadow);">
+      
+      <p class="section-eyebrow" style="display: inline-block; margin-bottom: 1rem;">Contatti</p>
+      
+      <h2 class="section-title" style="font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: 1.5rem; line-height: 1.1; letter-spacing: -0.02em;">
+        Mettiamoci in contatto.
+      </h2>
+
+      <p class="contact-sub" style="font-size: 1.1rem; color: var(--text-mid); max-width: 600px; margin: 0 auto 3rem auto; line-height: 1.6;">
+        Sono alla ricerca di un tirocinio curriculare sfidante in area industriale, produzione, data analysis o supply chain. <br>
+        <span style="color: var(--text-primary); font-weight: 600;">Scrivimi, rispondo entro 24 ore.</span>
+      </p>
+      
+      <div class="contact-btns" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3.5rem;">
+        
+        <a href="mailto:fp.piovano@gmail.com?subject=Contatto%20dal%20Portfolio%20Web" class="btn-primary" style="padding: 1rem 2rem; border-radius: 14px; font-size: 1rem; display: flex; align-items: center; gap: 0.6rem; text-decoration: none;">
+          <i class="fa-solid fa-envelope"></i> fp.piovano@gmail.com
+        </a>
+        
+        <a href="https://www.linkedin.com/in/federicopiovano" target="_blank" rel="noopener" class="btn-outline" style="padding: 1rem 2rem; border-radius: 14px; font-size: 1rem; display: flex; align-items: center; gap: 0.6rem; text-decoration: none; border: 1px solid var(--border); color: var(--text-primary); background: transparent; transition: all 0.2s ease;">
+          <i class="fa-brands fa-linkedin" style="color: #0A66C2; font-size: 1.2rem;"></i> LinkedIn
+        </a>
+
+      </div>
+      
+      <div class="contact-strip" style="display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 2.5rem;">
+        
+        <div class="contact-item" style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+          <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--bg-alt); display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem;">
+            <i class="fa-solid fa-location-dot" style="color: var(--text-muted); font-size: 1.1rem;"></i>
+          </div>
+          <p style="font-size: 0.95rem; color: var(--text-mid); margin: 0; font-weight: 500;">Grugliasco (TO), Italia</p>
+        </div>
+        
+        <div class="contact-item" style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+          <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--bg-alt); display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem;">
+            <i class="fa-solid fa-phone" style="color: var(--text-muted); font-size: 1.1rem;"></i>
+          </div>
+          <p style="font-size: 0.95rem; color: var(--text-mid); margin: 0; font-weight: 500;">+39 346 3298303</p>
+        </div>
+        
+        <div class="contact-item" style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+          <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--bg-alt); display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem;">
+            <i class="fa-solid fa-earth-europe" style="color: var(--text-muted); font-size: 1.1rem;"></i>
+          </div>
+          <p style="font-size: 0.95rem; color: var(--text-mid); margin: 0; font-weight: 500;">Italiano · English</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     FOOTER
+================================================================ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Federico <span>Piovano</span></div>
+
+    <div class="social-icons">
+      <a href="https://www.linkedin.com/in/federicopiovano" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+        <i class="fa-brands fa-linkedin" style="font-size:0.85rem;"></i>
+      </a>
+      <a href="mailto:fp.piovano@gmail.com" class="social-icon" aria-label="Email">
+        <i class="fa-solid fa-envelope" style="font-size:0.85rem;"></i>
+      </a>
+    </div>
+
+    <p class="footer-copy">© <span id="year"></span> Federico Piovano. All rights reserved.</p>
+  </div>
+</footer>
+
+
+<!-- ================================================================
+     JAVASCRIPT
+================================================================ -->
+<script>
+  /* ── Year ── */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ── AOS ── */
+  AOS.init({ once: true, duration: 700, easing: 'ease-out-cubic', offset: 60 });
+
+  /* ── Navbar scroll ── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  /* ── Mobile menu ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  let menuOpen = false;
+
+  hamburger.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle('open', menuOpen);
+    const spans = hamburger.querySelectorAll('span');
+    if (menuOpen) {
+      spans[0].style.transform = 'translateY(6.5px) rotate(45deg)';
+      spans[1].style.opacity = '0';
+      spans[2].style.transform = 'translateY(-6.5px) rotate(-45deg)';
+    } else {
+      spans[0].style.transform = '';
+      spans[1].style.opacity = '';
+      spans[2].style.transform = '';
+    }
+  });
+
+  function closeMobileMenu() {
+    menuOpen = false;
+    mobileMenu.classList.remove('open');
+    const spans = hamburger.querySelectorAll('span');
+    spans[0].style.transform = '';
+    spans[1].style.opacity = '';
+    spans[2].style.transform = '';
+  }
+
+  /* ── Active nav on scroll ── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          link.style.color = link.getAttribute('href') === `#${id}` ? 'var(--accent)' : '';
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(s => sectionObserver.observe(s));
+</script>
+
+</body>
+</html>

@@ -1791,16 +1791,20 @@
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a');
 
-  const sectionObserver = new IntersectionObserver((entries) => {
+const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const id = entry.target.id;
         navLinks.forEach(link => {
+          // Se l'ID della sezione corrisponde al link, diventa blu, altrimenti torna normale
           link.style.color = link.getAttribute('href') === `#${id}` ? 'var(--accent)' : '';
         });
       }
     });
-  }, { threshold: 0.4 });
+  }, { 
+    threshold: 0.1, // Basta che il 10% della sezione sia visibile
+    rootMargin: "-20% 0px -70% 0px" // Considera la sezione "attiva" quando entra nella parte alta dello schermo
+  });
 
   sections.forEach(s => sectionObserver.observe(s));
 </script>

@@ -1787,22 +1787,32 @@
     spans[2].style.transform = '';
   }
 
-  /* ── Active nav on scroll ── */
+/* ── Active nav on scroll (Soluzione Definitiva) ── */
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a');
 
-const sectionObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const id = entry.target.id;
-      navLinks.forEach(link => {
-        link.style.color = link.getAttribute('href') === `#${id}` ? 'var(--accent)' : '';
-      });
-    }
-  });
-}, { threshold: 0.4 }); // <--- QUESTA È LA RIGA DA CAMBIARE
+  window.addEventListener('scroll', () => {
+    let current = '';
 
-  sections.forEach(s => sectionObserver.observe(s));
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop; // Distanza della sezione dall'alto
+      const sectionHeight = section.clientHeight; // Altezza della sezione
+      
+      // Se lo scroll scende oltre l'inizio della sezione (meno 150px per compensare la navbar fissa)
+      if (scrollY >= (sectionTop - 150)) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      // Resetta il colore di tutti i link
+      link.style.color = '';
+      // Applica il blu solo a quello della sezione in cui ci troviamo
+      if (link.getAttribute('href') === `#${current}`) {
+        link.style.color = 'var(--accent)';
+      }
+    });
+  });
 </script>
 
 </body>
